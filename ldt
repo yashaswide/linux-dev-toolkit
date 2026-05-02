@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from commands import nav
+from commands import help_cmd
+
+def main():
+    args = sys.argv
+
+    if len(args) < 2:
+        print("Usage: ldt <command>")
+        return
+
+    cmd = args[1]
+    if cmd == "goto":
+        nav.goto(args)
+    elif cmd == "back":
+        nav.back()
+    elif cmd == "show":
+        nav.show()
+    elif cmd == "where":
+        nav.where()
+    elif cmd == "make":
+        nav.make(args)
+    elif cmd == "delete":
+        nav.delete(args)
+    elif cmd == "clear":
+        nav.clear()
+    elif cmd == "help":
+        help_cmd.show_help(args)
+    else:
+        print("Unknown command")
+
+if __name__ == "__main__":
+    main()
