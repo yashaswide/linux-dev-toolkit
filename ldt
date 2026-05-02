@@ -29,6 +29,8 @@ def main():
         nav.clear()
     elif cmd == "help":
         help_cmd.show_help(args)
+    elif cmd == "version":
+        print("LDT v0.1")
     else:
         print("Unknown command")
 

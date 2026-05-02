@@ -1,3 +1,8 @@
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-lightgrey)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+
 # Linux Dev Toolkit (LDT)
 
 A smart command-line tool that simplifies Linux navigation and common developer workflows by providing intuitive, easy-to-remember commands.
