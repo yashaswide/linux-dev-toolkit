@@ -10,6 +10,7 @@ help_data = {
     "rename-folder": "Rename folder\nUsage: ldt rename-folder <old_folder> <new_folder>",
     "head": "Show first n lines of file\nUsage: ldt head <file> [lines]",
     "tail": "Show last n lines of file\nUsage: ldt tail <file> [lines]",
+    "shutdown": "Shutdown the system\nUsage: ldt shutdown"
 }
 
 def show_help(args):

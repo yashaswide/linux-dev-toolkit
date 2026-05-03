@@ -256,3 +256,14 @@ def tail(args):
 
     except Exception as e:
         print("Error:", e)
+
+def shutdown():
+    confirm = input("⚠️ Are you sure you want to shut down the system? (y/n): ")
+    if confirm.lower() != "y":
+        print("Cancelled")
+        return
+    print("Shutting down...")
+    try:
+        os.system("sudo shutdown -h now")
+    except Exception as e:
+        print("Error:", e)

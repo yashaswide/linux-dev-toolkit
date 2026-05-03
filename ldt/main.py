@@ -42,6 +42,8 @@ def main():
         nav.head(args)
     elif cmd == "tail":
         nav.tail(args)
+    elif cmd == "shutdown":
+        nav.shutdown()
     else:
         print("Unknown command")
 
