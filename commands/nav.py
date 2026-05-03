@@ -157,3 +157,29 @@ def delete(args):
 
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
+
+def head(args):
+    if len(args) < 3:
+        print("Usage: ldt head <file> [lines]")
+        return
+    file_name = args[2]
+    # default lines = 10
+    num_lines = int(args[3]) if len(args) > 3 else 10
+    base_path = os.path.expanduser("~/Desktop")
+    file_path = None
+    # search file in Desktop tree
+    for root, dirs, files in os.walk(base_path):
+        if file_name in files:
+            file_path = os.path.join(root, file_name)
+            break
+    if not file_path:
+        print("File not found")
+        return
+    try:
+        with open(file_path, "r") as f:
+            lines = f.readlines()
+        print(f"\n--- First {num_lines} lines of {file_name} ---\n")
+        for line in lines[:num_lines]:
+            print(line.rstrip())
+    except Exception as e:
+        print("Error:", e)
