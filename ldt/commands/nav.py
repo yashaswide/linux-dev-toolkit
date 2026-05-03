@@ -258,12 +258,25 @@ def tail(args):
         print("Error:", e)
 
 def shutdown():
-    confirm = input("⚠️ Are you sure you want to shut down the system? (y/n): ")
+
+    confirm = input("⚠️ Shut down system? (y/n): ")
+
     if confirm.lower() != "y":
+
         print("Cancelled")
+
         return
-    print("Shutting down...")
-    try:
+
+    system = platform.system()
+
+    if system == "Darwin" or system == "Linux":
+
         os.system("sudo shutdown -h now")
-    except Exception as e:
-        print("Error:", e)
+
+    elif system == "Windows":
+
+        os.system("shutdown /s /t 0")
+
+    else:
+
+        print("Unsupported OS")
