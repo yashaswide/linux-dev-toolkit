@@ -1,0 +1,2 @@
+[console_scripts]
+ldt = ldt.main:main

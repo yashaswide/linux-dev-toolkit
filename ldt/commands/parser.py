@@ -21,7 +21,6 @@ def detect_intent(text):
 
     return None
 
-
 # -----------------------------
 # ENTITY EXTRACTION
 # -----------------------------
@@ -29,16 +28,13 @@ def extract_file(text):
     match = re.search(r"(\w+\.\w+)", text)
     return match.group(1) if match else None
 
-
 def extract_folder(text):
     match = re.search(r"folder (\w+)", text)
     return match.group(1) if match else "default"
 
-
 def extract_location(text):
     match = re.search(r"(desktop|downloads|documents)", text)
     return match.group(1) if match else "desktop"
-
 
 # -----------------------------
 # EXECUTION LAYER
@@ -57,7 +53,6 @@ def create_file(file_name, folder_name, location):
     print("\nCREATED file:", file_name)
     print("folder:", folder_name)
     print("path:", file_path)
-
 
 # -----------------------------
 # MAIN ENTRY
@@ -79,4 +74,4 @@ def run_sentence(sentence):
         create_file(file_name, folder_name, location)
 
     else:
-        print("❌ Unsupported command")
+        print("❌ Unsupported command") 

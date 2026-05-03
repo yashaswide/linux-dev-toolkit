@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from commands import nav
-from commands import help_cmd
+#sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from ldt.commands import nav
+from ldt.commands import help_cmd
+from ldt.commands import parser
 
 def main():
     args = sys.argv
@@ -18,7 +19,7 @@ def main():
     elif cmd == "back":
         nav.back()
     elif cmd == "show":
-        nav.show()
+        nav.show(args)
     elif cmd == "where":
         nav.where()
     elif cmd == "make":
@@ -31,6 +32,16 @@ def main():
         help_cmd.show_help(args)
     elif cmd == "version":
         print("LDT v0.1")
+    elif cmd == "run":
+        parser.run_sentence(" ".join(args[2:]))
+    elif cmd == "rename":
+        nav.rename(args)
+    elif cmd == "rename-folder":
+        nav.rename_folder(args)
+    elif cmd == "head":
+        nav.head(args)
+    elif cmd == "tail":
+        nav.tail(args)
     else:
         print("Unknown command")
 

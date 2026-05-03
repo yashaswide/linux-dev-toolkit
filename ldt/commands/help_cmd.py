@@ -5,7 +5,11 @@ help_data = {
     "where": "Show current directory\nUsage: ldt where",
     "make": "Create folder\nUsage: ldt make <name>",
     "delete": "Delete file/folder\nUsage: ldt delete <name> [--force]",
-    "clear": "Clear terminal\nUsage: ldt clear"
+    "clear": "Clear terminal\nUsage: ldt clear",
+    "rename": "Rename file\nUsage: ldt rename <old_name> <new_name>",
+    "rename-folder": "Rename folder\nUsage: ldt rename-folder <old_folder> <new_folder>",
+    "head": "Show first n lines of file\nUsage: ldt head <file> [lines]",
+    "tail": "Show last n lines of file\nUsage: ldt tail <file> [lines]",
 }
 
 def show_help(args):

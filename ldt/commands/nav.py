@@ -4,12 +4,34 @@ def goto(args):
     if len(args) < 3:
         print("Usage: ldt goto <folder>")
         return
-
-    try:
-        os.chdir(args[2])
-        print("Moved to:", os.getcwd())
-    except:
-        print("Folder not found")
+    folder = args[2]
+    # normalize
+    folder_lower = folder.lower()
+    # special cases
+    if folder_lower == "desktop":
+        path = os.path.expanduser("~/Desktop")
+        os.chdir(path)
+        print("Moved to:", path)
+        return
+    if folder_lower == "downloads":
+        path = os.path.expanduser("~/Downloads")
+        os.chdir(path)
+        print("Moved to:", path)
+        return
+    if folder_lower == "documents":
+        path = os.path.expanduser("~/Documents")
+        os.chdir(path)
+        print("Moved to:", path)
+        return
+    # otherwise search inside Desktop
+    base_path = os.path.expanduser("~/Desktop")
+    for root, dirs, files in os.walk(base_path):
+        if folder in dirs:
+            path = os.path.join(root, folder)
+            os.chdir(path)
+            print("Moved to:", path)
+            return
+    print("Folder not found")
 
 def back():
     os.chdir("..")
@@ -162,50 +184,75 @@ def head(args):
     if len(args) < 3:
         print("Usage: ldt head <file> [lines]")
         return
+
     file_name = args[2]
-    # default lines = 10
     num_lines = int(args[3]) if len(args) > 3 else 10
-    base_path = os.path.expanduser("~/Desktop")
+
     file_path = None
-    # search file in Desktop tree
-    for root, dirs, files in os.walk(base_path):
-        if file_name in files:
-            file_path = os.path.join(root, file_name)
-            break
+
+    # ✅ 1. check current directory
+    if os.path.isfile(file_name):
+        file_path = os.path.abspath(file_name)
+
+    # ✅ 2. fallback: search Desktop
+    else:
+        base_path = os.path.expanduser("~/Desktop")
+
+        for root, dirs, files in os.walk(base_path):
+            if file_name in files:
+                file_path = os.path.join(root, file_name)
+                break
+
     if not file_path:
         print("File not found")
         return
+
     try:
         with open(file_path, "r") as f:
             lines = f.readlines()
+
         print(f"\n--- First {num_lines} lines of {file_name} ---\n")
+
         for line in lines[:num_lines]:
             print(line.rstrip())
+
     except Exception as e:
         print("Error:", e)
-
 def tail(args):
     if len(args) < 3:
-        print("Usage: ldt head <file> [lines]")
+        print("Usage: ldt tail <file> [lines]")
         return
+
     file_name = args[2]
-    # default lines = 10
     num_lines = int(args[3]) if len(args) > 3 else 10
-    base_path = os.path.expanduser("~/Desktop")
+
     file_path = None
-    # search file in Desktop tree
-    for root, dirs, files in os.walk(base_path):
-        if file_name in files:
-            file_path = os.path.join(root, file_name)
-            break
+
+    # ✅ 1. check current directory first
+    if os.path.isfile(file_name):
+        file_path = os.path.abspath(file_name)
+
+    # ✅ 2. fallback: search Desktop
+    else:
+        base_path = os.path.expanduser("~/Desktop")
+
+        for root, dirs, files in os.walk(base_path):
+            if file_name in files:
+                file_path = os.path.join(root, file_name)
+                break
+
     if not file_path:
         print("File not found")
         return
+
     try:
         with open(file_path, "r") as f:
             lines = f.readlines()
+
         print(f"\n--- Last {num_lines} lines of {file_name} ---\n")
+
         for line in lines[-num_lines:]:
             print(line.rstrip())
+
     except Exception as e:
         print("Error:", e)

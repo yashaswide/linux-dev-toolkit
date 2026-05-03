@@ -1,0 +1,8 @@
+[project]
+name = "ldt"
+version = "0.1.0"
+description = "Linux Dev Toolkit CLI"
+authors = [{ name = "Yashaswi De" }]
+
+[project.scripts]
+ldt = "ldt.main:main"
