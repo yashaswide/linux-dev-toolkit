@@ -1,5 +1,6 @@
 import os
 import shutil
+import platform
 def goto(args):
     if len(args) < 3:
         print("Usage: ldt goto <folder>")
