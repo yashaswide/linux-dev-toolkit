@@ -1,6 +1,7 @@
 import os
 import shutil
 import platform
+from pathlib import Path
 def goto(args):
     if len(args) < 3:
         print("Usage: ldt goto <folder>")
@@ -40,13 +41,15 @@ def back():
 
 
 def show(args):
-    items = os.listdir()
+    path = Path.cwd()
+    items = path.iterdir()
 
     files = []
     dirs = []
 
     for item in items:
-        if os.path.isdir(item):
+        full_path = os.path.join(path, item)
+        if os.path.isdir(full_path):
             dirs.append(item)
         else:
             files.append(item)
