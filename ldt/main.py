@@ -5,6 +5,22 @@ import os
 from ldt.commands import nav
 from ldt.commands import help_cmd
 from ldt.commands import parser
+import readline
+try:
+    import readline
+except ImportError:
+    readline = None
+COMMANDS = [
+    "goto", "back", "show", "where", "head", "tail",
+    "rename", "delete", "help", "clear", "exit", "shutdown",
+    "rename-folder", "make"
+]
+def completer(text, state):
+    matches = [cmd for cmd in COMMANDS if cmd.startswith(text)]
+    return matches[state] if state < len(matches) else None
+if readline:
+    readline.set_completer(completer)
+    readline.parse_and_bind("tab: complete")
 
 VERSION = "0.1.0"
 
