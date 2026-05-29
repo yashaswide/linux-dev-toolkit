@@ -11,5 +11,6 @@ ldt.egg-info/top_level.txt
 ldt/commands/__init__.py
 ldt/commands/help_cmd.py
 ldt/commands/nav.py
+ldt/commands/nlm.py
 ldt/commands/parser.py
 ldt/commands/project.py
